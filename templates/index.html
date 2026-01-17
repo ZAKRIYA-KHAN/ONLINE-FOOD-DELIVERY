@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Food Runner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header>
+        <div class="container navbar">
+            <h1>The Food Runner 🏃‍♂️</h1>
+            <div class="nav-links">
+                <button onclick="toggleHistory()">📜 Order History</button>
+                <div class="cart-icon" onclick="toggleCart()">
+                    🛒 <span id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <aside id="history-sidebar" class="history-sidebar">
+        <div class="sidebar-header">
+            <h2>Order History</h2>
+            <button class="close-sidebar-btn" onclick="toggleHistory()">×</button>
+        </div>
+        <div id="history-list" class="history-content">
+            <p>Loading history...</p>
+        </div>
+    </aside>
+
+    <div class="container main-layout">
+        
+        <section class="content-section" id="menu-section">
+            
+            <div id="tracker-box" class="tracker-box hidden">
+                <h3>🚚 Live Order Tracking</h3>
+                <p>Order ID: <span id="track-id">#</span></p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <p class="status-text" id="track-status">Waiting...</p>
+            </div>
+
+            <h2>Delicious Menu</h2>
+            <div id="menu-container" class="menu-grid"></div>
+        </section>
+
+        <aside class="cart-sidebar" id="cart-sidebar">
+            <div class="cart-header">
+                <h2>Your Cart</h2>
+                <button class="close-cart" onclick="toggleCart()">×</button>
+            </div>
+            
+            <div id="cart-items-container">
+                <p>Your cart is empty.</p>
+            </div>
+
+            <div class="cart-footer">
+                <h3>Total: $<span id="total-price">0.00</span></h3>
+                
+                <form id="checkout-form">
+                    <h4>Delivery Details</h4>
+                    <input type="text" id="c-name" placeholder="Full Name" required>
+                    <input type="text" id="c-address" placeholder="Delivery Address" required>
+                    
+                    <input type="email" id="c-email" placeholder="Email Address" required>
+                    <input type="tel" id="c-phone" placeholder="Phone Number" required>
+                    
+                    <label for="payment-method">Payment Method:</label>
+                    <select id="payment-method" onchange="updatePaymentFields()">
+                        <option value="Cash on Delivery">Cash on Delivery</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="PayPal">PayPal</option>
+                    </select>
+
+                    <div id="payment-extra-fields"></div>
+
+                    <button type="submit" class="checkout-btn">Confirm Order</button>
+                </form>
+            </div>
+        </aside>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
